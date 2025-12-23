@@ -1,0 +1,159 @@
+{
+  "common": {
+    "siteName": "Boutique",
+    "home": "Accueil",
+    "products": "Produits",
+    "cart": "Panier",
+    "checkout": "Commander",
+    "account": "Mon Compte",
+    "search": "Rechercher...",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer"
+  },
+  "hero": {
+    "title": "Découvrez Notre Collection",
+    "subtitle": "Des produits exceptionnels sélectionnés avec soin pour vous offrir le meilleur",
+    "cta": "Explorer",
+    "ctaSecondary": "En Savoir Plus"
+  },
+  "products": {
+    "title": "Nos Produits",
+    "featured": "Produits Vedettes",
+    "new": "Nouveautés",
+    "sale": "Promotions",
+    "addToCart": "Ajouter au Panier",
+    "outOfStock": "Rupture de Stock",
+    "price": "Prix",
+    "category": "Catégorie",
+    "description": "Description",
+    "details": "Détails",
+    "reviews": "Avis",
+    "filterBy": "Filtrer par",
+    "sortBy": "Trier par",
+    "noProducts": "Aucun produit trouvé",
+    "categories": {
+      "All": "Tout",
+      "Electronics": "Électronique",
+      "Accessories": "Accessoires",
+      "Clothing": "Vêtements"
+    }
+  },
+  "cart": {
+    "title": "Votre Panier",
+    "empty": "Votre panier est vide",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "tax": "TVA",
+    "total": "Total",
+    "checkout": "Passer la Commande",
+    "continueShopping": "Continuer vos Achats",
+    "remove": "Supprimer",
+    "quantity": "Quantité"
+  },
+  "checkout": {
+    "title": "Finaliser la Commande",
+    "shipping": "Informations de Livraison",
+    "payment": "Paiement",
+    "review": "Vérification",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code Postal",
+    "country": "Pays",
+    "placeOrder": "Confirmer la Commande",
+    "orderSuccess": "Commande Confirmée!",
+    "orderNumber": "Numéro de Commande"
+  },
+  "footer": {
+    "about": "À Propos",
+    "contact": "Contact",
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "newsletter": "Newsletter",
+    "subscribeText": "Inscrivez-vous pour recevoir nos offres",
+    "subscribe": "S'inscrire",
+    "copyright": "© 2024 Boutique. Tous droits réservés."
+  },
+  "language": {
+    "current": "Français",
+    "switch": "Changer de langue"
+  },
+  "productsData": {
+    "1": {
+      "name": "Casque Premium",
+      "category": "Électronique",
+      "description": "Casque sans fil de haute qualité avec suppression active du bruit. Découvrez un son cristallin avec des basses profondes et un son immersif.",
+      "details": {
+        "0": "40 heures d'autonomie",
+        "1": "Suppression active du bruit",
+        "2": "Bluetooth 5.0",
+        "3": "Conception pliable",
+        "4": "Microphone intégré"
+      }
+    },
+    "2": {
+      "name": "Sac à Dos en Cuir",
+      "category": "Accessoires",
+      "description": "Sac à dos en cuir véritable fabriqué à la main, parfait pour le travail ou les voyages. Comprend plusieurs compartiments et une pochette rembourrée pour ordinateur portable.",
+      "details": {
+        "0": "Cuir véritable",
+        "1": "Compartiment pour portable 15\"",
+        "2": "Résistant à l'eau",
+        "3": "Bretelles réglables",
+        "4": "Multiples poches"
+      }
+    },
+    "3": {
+      "name": "Montre Connectée",
+      "category": "Électronique",
+      "description": "Montre connectée avancée avec suivi complet de la santé. Suivez votre forme physique, recevez des notifications et restez connecté.",
+      "details": {
+        "0": "Moniteur de fréquence cardiaque",
+        "1": "Suivi GPS",
+        "2": "Résistant à l'eau 5ATM",
+        "3": "Batterie de 7 jours",
+        "4": "Écran AMOLED"
+      }
+    },
+    "4": {
+      "name": "Lunettes de Soleil Designer",
+      "category": "Accessoires",
+      "description": "Lunettes de soleil de créateur avec protection UV et verres polarisés. Élégantes et fonctionnelles pour toutes les occasions.",
+      "details": {
+        "0": "Protection UV 100%",
+        "1": "Verres polarisés",
+        "2": "Monture en titane",
+        "3": "Étui inclus",
+        "4": "Résistant aux rayures"
+      }
+    },
+    "5": {
+      "name": "Enceinte Sans Fil",
+      "category": "Électronique",
+      "description": "Enceinte Bluetooth portable avec son immersif à 360°. Parfait pour les fêtes, les aventures en plein air ou la détente à la maison.",
+      "details": {
+        "0": "Son 360°",
+        "1": "Batterie 24 heures",
+        "2": "Étanchéité IPX7",
+        "3": "Mode fête",
+        "4": "Microphone intégré"
+      }
+    },
+    "6": {
+      "name": "Portefeuille en Cuir",
+      "category": "Accessoires",
+      "description": "Portefeuille fin en cuir avec blocage RFID et design moderne. Gardez vos cartes et votre argent en sécurité avec style.",
+      "details": {
+        "0": "Blocage RFID",
+        "1": "Cuir véritable",
+        "2": "8 emplacements cartes",
+        "3": "Compartiment billets",
+        "4": "Design minimaliste"
+      }
+    }
+  }
+}

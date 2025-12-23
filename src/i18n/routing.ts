@@ -4,8 +4,8 @@ export const routing = defineRouting({
     // Supported locales
     locales: ['fr', 'ar'],
 
-    // Default locale (French)
-    defaultLocale: 'fr',
+    // Default locale (Arabic)
+    defaultLocale: 'ar',
 
     // Locale prefix strategy
     localePrefix: 'always'

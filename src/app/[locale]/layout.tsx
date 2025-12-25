@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { SnowEffect } from '@/components/ui/SnowEffect';
 import { CartProvider } from '@/context/CartContext';
+import { cookies } from 'next/headers';
 import '@/app/globals.css';
 
 interface LocaleLayoutProps {
@@ -29,6 +30,8 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme')?.value || 'light';
 
   // Validate locale
   if (!routing.locales.includes(locale as 'fr' | 'ar')) {
@@ -42,7 +45,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+    <html lang={locale} dir={dir} data-theme={theme} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <CartProvider>
           <NextIntlClientProvider messages={messages}>

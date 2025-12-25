@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import { useCart } from '@/context/CartContext';
 
 export function Header() {
@@ -68,7 +69,7 @@ export function Header() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         boxShadow: '0 4px 6px rgba(255,107,107,0.3)',
-                        border: '2px solid white',
+                        border: '2px solid var(--color-bg-primary)',
                         zIndex: 10
                       }}
                       transition={{
@@ -86,10 +87,12 @@ export function Header() {
           </nav>
 
           <motion.div
+            className="flex flex-center gap-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
+            <ThemeToggle />
             <LanguageSwitcher />
           </motion.div>
         </div>

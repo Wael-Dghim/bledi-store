@@ -4,7 +4,15 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Add any additional Next.js config here
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.converty.shop',
+        pathname: '**',
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

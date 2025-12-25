@@ -4,7 +4,7 @@ import Snowfall from 'react-snowfall';
 import { useMemo } from 'react';
 
 export function SnowEffect() {
-  const snowflakeCount = useMemo(() => 100, []);
+  const snowflakeCount = useMemo(() => 30, []);
   
   return (
     <div style={{
@@ -13,11 +13,11 @@ export function SnowEffect() {
       left: 0,
       width: '100vw',
       height: '100vh',
-      zIndex: 1, // Below header (z-1000) but above background
+      zIndex: -1, // Behind content
       pointerEvents: 'none'
     }}>
       <Snowfall
-        color="#a5f3fc" // Cyan/Turquoise tint
+        color="#D4AF37" // Gold tint
         snowflakeCount={snowflakeCount}
         style={{
           position: 'absolute',

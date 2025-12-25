@@ -17,6 +17,20 @@
     "cta": "Explorer",
     "ctaSecondary": "En Savoir Plus"
   },
+  "features": {
+    "security": {
+      "title": "Sécurité Maximale",
+      "desc": "Toutes vos transactions sont cryptées et protégées"
+    },
+    "rapidity": {
+      "title": "Rapidité Éclatante",
+      "desc": "Livraison express et service client ultra-réactif"
+    },
+    "quality": {
+      "title": "Qualité Garantie",
+      "desc": "Une sélection rigoureuse des meilleurs produits"
+    }
+  },
   "products": {
     "title": "Nos Produits",
     "featured": "Produits Vedettes",
@@ -32,6 +46,7 @@
     "filterBy": "Filtrer par",
     "sortBy": "Trier par",
     "noProducts": "Aucun produit trouvé",
+    "showAll": "Voir tous les produits",
     "categories": {
       "All": "Tout",
       "Electronics": "Électronique",

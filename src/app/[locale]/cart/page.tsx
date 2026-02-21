@@ -1,33 +1,60 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useCart } from '@/context/CartContext';
 import { Link } from '@/i18n/navigation';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 import { AnimatedContainer, StaggerContainer, StaggerItem } from '@/components/ui/AnimatedCard';
+import styles from './cart.module.css';
 
 export default function CartPage() {
   const t = useTranslations('cart');
-  const common = useTranslations('common');
-  const { items, removeFromCart, addToCart, totalItems, totalPrice } = useCart();
+  const locale = useLocale();
+  const { items, removeFromCart, updateQuantity, totalItems, totalPrice } = useCart();
+
+  const emptyCartText = {
+    en: 'Explore our configurator to create your unique piece.',
+    ar: 'استكشف أداة التصميم لإنشاء قطعتك الفريدة.',
+    fr: 'Explorez notre configurateur pour créer votre pièce unique.',
+  };
+
+  const summaryText = {
+    en: 'Summary',
+    ar: 'الملخص',
+    fr: 'Résumé',
+  };
+
+  const freeText = {
+    en: 'Free',
+    ar: 'مجاني',
+    fr: 'Gratuit',
+  };
+
+  const customizedText = {
+    en: 'Customized',
+    ar: 'مخصص',
+    fr: 'Personnalisé',
+  };
+
+  const getText = (obj: Record<string, string>) => obj[locale] || obj['en'];
 
   if (items.length === 0) {
     return (
-      <div style={{ paddingTop: '120px', minHeight: '80vh' }}>
+      <div className={styles.cartPageEmpty}>
         <div className="container">
-          <AnimatedContainer className="glass-card text-center" style={{ padding: 'var(--spacing-3xl)' }}>
+          <AnimatedContainer className="glass-card text-center" style={{ padding: 'var(--spacing-2xl)' }}>
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div style={{ fontSize: '4rem', marginBottom: 'var(--spacing-lg)' }}>🛒</div>
-              <h1 style={{ fontSize: 'var(--font-size-3xl)', marginBottom: 'var(--spacing-md)' }}>{t('empty')}</h1>
-              <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--spacing-xl)' }}>
-                Explorez nos produits pour trouver votre bonheur.
+              <div className={styles.emptyCartIcon}>🛒</div>
+              <h1 className={styles.emptyCartTitle}>{t('empty')}</h1>
+              <p className={styles.emptyCartText}>
+                {getText(emptyCartText)}
               </p>
-              <Link href="/products">
+              <Link href="/configure">
                 <AnimatedButton variant="primary">
                   {t('continueShopping')}
                 </AnimatedButton>
@@ -40,75 +67,79 @@ export default function CartPage() {
   }
 
   return (
-    <div style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: 'var(--spacing-3xl)' }}>
+    <div className={styles.cartPage}>
       <div className="container">
-        <motion.h1 
-          className="mb-xl gradient-text"
-          style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 700 }}
+        <motion.h1
+          className={`${styles.cartTitle} gradient-text`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
           {t('title')}
         </motion.h1>
 
-        <div className="grid grid-3" style={{ gridTemplateColumns: '2fr 1fr', gap: 'var(--spacing-xl)', alignItems: 'start' }}>
-          {/* Items List */}
+        <div className={styles.cartGrid}>
           <StaggerContainer className="flex flex-col gap-md">
             <AnimatePresence mode="popLayout">
               {items.map((item) => (
                 <StaggerItem key={item.id}>
-                  <motion.div 
-                    className="glass-card flex flex-between"
-                    style={{ padding: 'var(--spacing-md)', gap: 'var(--spacing-lg)' }}
+                  <motion.div
+                    className={`glass-card ${styles.cartItem}`}
                     layout
                     exit={{ opacity: 0, x: -100 }}
                   >
-                    <div className="flex gap-md" style={{ alignItems: 'center' }}>
-                      <div style={{ 
-                        width: '80px', 
-                        height: '80px', 
-                        background: 'var(--color-bg-secondary)', 
-                        borderRadius: 'var(--radius-md)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '2rem'
-                      }}>
-                        {/* Since we don't have images in context yet, use a fallback emoji or item icon */}
-                        📦
+                    <div className={styles.cartItemInner}>
+                      <div className={styles.itemDetails}>
+                        <div
+                          className={item.isConfigured ? styles.itemImageConfigured : styles.itemImageDefault}
+                          style={item.isConfigured ? {
+                            background: `linear-gradient(135deg, #8B7355, ${item.configuration?.resinColorHex || '#1E90FF'})`
+                          } : undefined}
+                        >
+                          {item.isConfigured ? '🎨' : '📦'}
+                        </div>
+                        <div className={styles.itemInfo}>
+                          <h3 className={styles.itemName}>{item.name}</h3>
+                          {item.isConfigured && item.configuration && (
+                            <p className={styles.itemConfig}>
+                              {item.configuration.sizeLabel} • {item.configuration.resinColor}
+                            </p>
+                          )}
+                          {item.isConfigured && (
+                            <span className={styles.customBadge}>
+                              {getText(customizedText)}
+                            </span>
+                          )}
+                          <p className={styles.itemPrice}>${item.price.toFixed(2)}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>{item.name}</h3>
-                        <p style={{ color: 'var(--color-accent-secondary)', fontWeight: 600 }}>${item.price}</p>
-                      </div>
-                    </div>
 
-                    <div className="flex gap-lg" style={{ alignItems: 'center' }}>
-                      <div className="flex" style={{ background: 'rgba(0,0,0,0.05)', borderRadius: 'var(--radius-sm)' }}>
-                        <button 
-                          onClick={() => addToCart(item, -1)}
-                          style={{ padding: 'var(--spacing-xs) var(--spacing-sm)', border: 'none', background: 'none', cursor: 'pointer' }}
+                      <div className={styles.itemActions}>
+                        <div className={styles.quantityControls}>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className={styles.quantityBtn}
+                          >
+                            −
+                          </button>
+                          <span className={styles.quantityValue}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className={styles.quantityBtn}
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className={styles.removeBtn}
+                          title={t('remove')}
                         >
-                          −
-                        </button>
-                        <span style={{ padding: 'var(--spacing-xs) var(--spacing-sm)', minWidth: '30px', textAlign: 'center' }}>
-                          {item.quantity}
-                        </span>
-                        <button 
-                          onClick={() => addToCart(item, 1)}
-                          style={{ padding: 'var(--spacing-xs) var(--spacing-sm)', border: 'none', background: 'none', cursor: 'pointer' }}
-                        >
-                          +
+                          ✕
                         </button>
                       </div>
-                      
-                      <button 
-                        onClick={() => removeFromCart(item.id)}
-                        style={{ color: '#ff6b6b', border: 'none', background: 'none', cursor: 'pointer', fontSize: '1.2rem' }}
-                        title={t('remove')}
-                      >
-                        ✕
-                      </button>
                     </div>
                   </motion.div>
                 </StaggerItem>
@@ -116,31 +147,33 @@ export default function CartPage() {
             </AnimatePresence>
           </StaggerContainer>
 
-          {/* Summary */}
-          <motion.div 
-            className="glass-card"
-            style={{ padding: 'var(--spacing-xl)', position: 'sticky', top: '120px' }}
+          <motion.div
+            className={`glass-card ${styles.cartSummary}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 style={{ fontSize: 'var(--font-size-xl)', marginBottom: 'var(--spacing-lg)' }}>Résumé</h2>
-            <div className="flex flex-between mb-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              <span>{t('subtotal')}</span>
+            <h2 className={styles.summaryTitle}>
+              {getText(summaryText)}
+            </h2>
+            <div className={`flex flex-between mb-sm ${styles.summaryRow}`}>
+              <span>{t('subtotal')} ({totalItems})</span>
               <span>${totalPrice.toFixed(2)}</span>
             </div>
-            <div className="flex flex-between mb-sm" style={{ color: 'var(--color-text-secondary)' }}>
+            <div className={`flex flex-between mb-sm ${styles.summaryRow}`}>
               <span>{t('shipping')}</span>
-              <span>Gratuit</span>
+              <span style={{ color: 'var(--color-success)' }}>{getText(freeText)}</span>
             </div>
-            <div style={{ margin: 'var(--spacing-md) 0', borderTop: '1px solid var(--border-light)' }}></div>
-            <div className="flex flex-between mb-xl" style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700 }}>
+            <div className={styles.summaryDivider}></div>
+            <div className={`flex flex-between mb-lg ${styles.summaryTotal}`}>
               <span>{t('total')}</span>
-              <span>${totalPrice.toFixed(2)}</span>
+              <span className="gradient-text">${totalPrice.toFixed(2)}</span>
             </div>
-            <AnimatedButton variant="primary" style={{ width: '100%' }}>
-              {t('checkout')}
-            </AnimatedButton>
+            <Link href="/checkout" className={styles.checkoutLink}>
+              <AnimatedButton variant="primary" style={{ width: '100%' }}>
+                {t('checkout')}
+              </AnimatedButton>
+            </Link>
           </motion.div>
         </div>
       </div>
